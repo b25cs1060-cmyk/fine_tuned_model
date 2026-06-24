@@ -32,7 +32,6 @@ loaded_github_repo=loader.load();
 
 text_splitter = RecursiveCharacterTextSplitter(
     chunk_size = 4000 ,
-    chunk_overlap =1000
 )
 text_splits =text_splitter.split_documents(loaded_github_repo)
 
