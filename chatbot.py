@@ -5,6 +5,7 @@ import json
 import torch
 from google.colab import userdata
 from typing import Collection, TypedDict, Sequence, Union, Optional, Annotated
+from pydantic import BaseModel, Field, validator
 
 from langgraph.graph import StateGraph, START, END
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage, SystemMessage, BaseMessage
@@ -175,10 +176,13 @@ user_input = input("Enter: ")
 nest_asyncio.apply()
 app = FastAPI()
 
+
+class ChatRequest(BaseModel):
+  user_input : str
+
 @app.post("/chat")
-async def chat(request: Request):
-    data = await request.json()
-    user_message = data.get("user_input")
+async def chat(request: ChatRequest):
+    user_message = request.user_input
     context = text_retriever(user_message)
     response_text = get_response(user_message, context)
     return {"bot_response": response_text}
@@ -191,7 +195,7 @@ server_thread.start()
 
 from pyngrok import ngrok
 
-ngrok.set_auth_token("3FdFau1luEFaE0klQWUz8ZQRCKI_5CE33z4SffWcYfBYK6DpV")
+ngrok.set_auth_token("")
 
 public_url = ngrok.connect(8000)
 print(f"\n Your API : {public_url.public_url}")
