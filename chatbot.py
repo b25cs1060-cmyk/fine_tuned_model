@@ -25,6 +25,11 @@ from trl import SFTTrainer, SFTConfig
 import warnings
 warnings.filterwarnings("ignore")
 
+from fastapi import FastAPI,Request
+import uvicorn 
+import pyngrok
+import nest_asyncio
+
 GROQ_API_KEY = userdata.get('GROQ_API_KEY')
 os.environ["GROQ_API_KEY"] = GROQ_API_KEY
 
@@ -153,14 +158,40 @@ chat_history = []
 
 user_input = input("Enter: ")
 
-while user_input.lower() != "exit":
-    chat_history.append({"role": "user", "content": user_input})
+
+# while user_input.lower() != "exit":
+#     chat_history.append({"role": "user", "content": user_input})
     
   
-    context = text_retriever(user_input)
-    response_text = get_response(user_input, context)
+#     context = text_retriever(user_input)
+#     response_text = get_response(user_input, context)
     
-    print(f"\nBot: {response_text}\n")
+#     print(f"\nBot: {response_text}\n")
     
-    chat_history.append({"role": "assistant", "content": response_text})
-    user_input = input("Enter: ")
+#     chat_history.append({"role": "assistant", "content": response_text})
+#     user_input = input("Enter: ")
+# import threading
+
+nest_asyncio.apply()
+app = FastAPI()
+
+@app.post("/chat")
+async def chat(request: Request):
+    data = await request.json()
+    user_message = data.get("user_input")
+    context = text_retriever(user_message)
+    response_text = get_response(user_message, context)
+    return {"bot_response": response_text}
+
+def run_server():
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+
+server_thread = threading.Thread(target=run_server)
+server_thread.start()
+
+from pyngrok import ngrok
+
+ngrok.set_auth_token("3FdFau1luEFaE0klQWUz8ZQRCKI_5CE33z4SffWcYfBYK6DpV")
+
+public_url = ngrok.connect(8000)
+print(f"\n Your API : {public_url.public_url}")
