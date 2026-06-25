@@ -1,0 +1,802 @@
+[
+    {
+        "query_id": 25,
+        "repo_name": "fast_api",
+        "file_path": "main2.py",
+        "question": "What does the `Items` class represent in this code?",
+        "context": "from fastapi import FastAPI\nfrom pydantic import BaseModel\n\nmy_app2 = FastAPI()\n\n\nclass Items(BaseModel):\n    item_id: int\n    item_name: str\n    item_price: int\n\n@my_app2.post(\"/items\")\ndef insert_item_info(item: Items):\n     print(item)\n     return item\n     \n\nif __name__ == \"__main__\":\n     import uvicorn\n     uvicorn.run(my_app2 ,  host =\"0.0.0.0\" , port=8000 )",
+        "answer": "The `Items` class represents a data model for items, which is used to validate and structure the data sent in the POST request to the `/items` endpoint."
+    },
+    {
+        "query_id": 26,
+        "repo_name": "fast_api",
+        "file_path": "main2.py",
+        "question": "Why is the `item` parameter annotated with the `Items` class in the `insert_item_info` function?",
+        "context": "from fastapi import FastAPI\nfrom pydantic import BaseModel\n\nmy_app2 = FastAPI()\n\n\nclass Items(BaseModel):\n    item_id: int\n    item_name: str\n    item_price: int\n\n@my_app2.post(\"/items\")\ndef insert_item_info(item: Items):\n     print(item)\n     return item\n     \n\nif __name__ == \"__main__\":\n     import uvicorn\n     uvicorn.run(my_app2 ,  host =\"0.0.0.0\" , port=8000 )",
+        "answer": "The `item` parameter is annotated with the `Items` class to validate and parse the JSON data sent in the request body, ensuring it conforms to the defined data model."
+    },
+    {
+        "query_id": 27,
+        "repo_name": "fast_api",
+        "file_path": "main2.py",
+        "question": "What does the `insert_item_info` function return when it is called?",
+        "context": "from fastapi import FastAPI\nfrom pydantic import BaseModel\n\nmy_app2 = FastAPI()\n\n\nclass Items(BaseModel):\n    item_id: int\n    item_name: str\n    item_price: int\n\n@my_app2.post(\"/items\")\ndef insert_item_info(item: Items):\n     print(item)\n     return item\n     \n\nif __name__ == \"__main__\":\n     import uvicorn\n     uvicorn.run(my_app2 ,  host =\"0.0.0.0\" , port=8000 )",
+        "answer": "The `insert_item_info` function returns the `item` object that was passed to it, which is the same data that was sent in the request body."
+    },
+    {
+        "query_id": 28,
+        "repo_name": "fast_api",
+        "file_path": "main4.py",
+        "question": "What does the line `@my_app.get('/')` do?",
+        "context": "from fastapi import FastAPI\nimport uvicorn\n\nmy_app = FastAPI()\n\n@my_app.get(\"/\")\ndef read_root():\n    return {\"message\": \"hello everyone!\"}\n\n@my_app.get(\"/item/{item_id}\")\ndef read_item(item_id: int, q: str | None = None):\n    return {\"item_id\": item_id, \"query\": q}\n\n\n@my_app.put(\"/products\")\n# PUT requests can be sent from the OpenAPI docs or any HTTP client\ndef update_product(product_name: str | None = None, product_type: str | None = None):\n    return {\"product_name\": product_name, \"product_t",
+        "answer": "It defines a route for a GET request to the root URL ('/') of the FastAPI application."
+    },
+    {
+        "query_id": 29,
+        "repo_name": "fast_api",
+        "file_path": "main4.py",
+        "question": "Why does the `read_item` function accept `q: str | None = None`?",
+        "context": "from fastapi import FastAPI\nimport uvicorn\n\nmy_app = FastAPI()\n\n@my_app.get(\"/\")\ndef read_root():\n    return {\"message\": \"hello everyone!\"}\n\n@my_app.get(\"/item/{item_id}\")\ndef read_item(item_id: int, q: str | None = None):\n    return {\"item_id\": item_id, \"query\": q}\n\n\n@my_app.put(\"/products\")\n# PUT requests can be sent from the OpenAPI docs or any HTTP client\ndef update_product(product_name: str | None = None, product_type: str | None = None):\n    return {\"product_name\": product_name, \"product_t",
+        "answer": "It allows the function to accept an optional query parameter, which can be None if not provided in the request."
+    },
+    {
+        "query_id": 30,
+        "repo_name": "fast_api",
+        "file_path": "main4.py",
+        "question": "What does the line `uvicorn.run(my_app, host='0.0.0.0', port=8000)` do?",
+        "context": "from fastapi import FastAPI\nimport uvicorn\n\nmy_app = FastAPI()\n\n@my_app.get(\"/\")\ndef read_root():\n    return {\"message\": \"hello everyone!\"}\n\n@my_app.get(\"/item/{item_id}\")\ndef read_item(item_id: int, q: str | None = None):\n    return {\"item_id\": item_id, \"query\": q}\n\n\n@my_app.put(\"/products\")\n# PUT requests can be sent from the OpenAPI docs or any HTTP client\ndef update_product(product_name: str | None = None, product_type: str | None = None):\n    return {\"product_name\": product_name, \"product_t",
+        "answer": "It runs the FastAPI application using the Uvicorn server on host '0.0.0.0' and port 8000."
+    },
+    {
+        "query_id": 31,
+        "repo_name": "fast_api",
+        "file_path": "postgre/database.py",
+        "question": "What is the purpose of the `DB_HOST` variable?",
+        "context": "import os\nfrom sqlalchemy import create_engine\nfrom sqlalchemy.orm import sessionmaker\nfrom sqlalchemy.ext.declarative import declarative_base\n\nDB_HOST = os.getenv(\"DB_HOST\", \"postgres-service\")\nDB_PORT = os.getenv(\"DB_PORT\", \"5432\")\nDB_USERNAME = os.getenv(\"DB_USERNAME\", \"b25cs1060\")\nDB_PASSWORD = os.getenv(\"DB_PASSWORD\", \"Micdrop7!\")\nDB_DATABASE = os.getenv(\"DB_DATABASE\", \"student_course_database\")\n\nDATABASE_URL = (\n    f\"postgresql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_DATABAS",
+        "answer": "The `DB_HOST` variable stores the hostname or IP address of the PostgreSQL database service."
+    },
+    {
+        "query_id": 32,
+        "repo_name": "fast_api",
+        "file_path": "postgre/database.py",
+        "question": "What does the `create_engine` function return?",
+        "context": "import os\nfrom sqlalchemy import create_engine\nfrom sqlalchemy.orm import sessionmaker\nfrom sqlalchemy.ext.declarative import declarative_base\n\nDB_HOST = os.getenv(\"DB_HOST\", \"postgres-service\")\nDB_PORT = os.getenv(\"DB_PORT\", \"5432\")\nDB_USERNAME = os.getenv(\"DB_USERNAME\", \"b25cs1060\")\nDB_PASSWORD = os.getenv(\"DB_PASSWORD\", \"Micdrop7!\")\nDB_DATABASE = os.getenv(\"DB_DATABASE\", \"student_course_database\")\n\nDATABASE_URL = (\n    f\"postgresql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_DATABAS",
+        "answer": "The `create_engine` function returns a `Engine` object that represents the connection to the database."
+    },
+    {
+        "query_id": 33,
+        "repo_name": "fast_api",
+        "file_path": "postgre/database.py",
+        "question": "Why is the `autocommit` and `autoflush` parameters set to `False` for `SessionLocal`?",
+        "context": "import os\nfrom sqlalchemy import create_engine\nfrom sqlalchemy.orm import sessionmaker\nfrom sqlalchemy.ext.declarative import declarative_base\n\nDB_HOST = os.getenv(\"DB_HOST\", \"postgres-service\")\nDB_PORT = os.getenv(\"DB_PORT\", \"5432\")\nDB_USERNAME = os.getenv(\"DB_USERNAME\", \"b25cs1060\")\nDB_PASSWORD = os.getenv(\"DB_PASSWORD\", \"Micdrop7!\")\nDB_DATABASE = os.getenv(\"DB_DATABASE\", \"student_course_database\")\n\nDATABASE_URL = (\n    f\"postgresql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_DATABAS",
+        "answer": "The `autocommit` and `autoflush` parameters are set to `False` to ensure that database transactions are explicitly committed or rolled back, rather than automatically committing or flushing changes."
+    },
+    {
+        "query_id": 34,
+        "repo_name": "fast_api",
+        "file_path": "postgre/log_request.py",
+        "question": "What is the purpose of the `seen_logs` set in this code?",
+        "context": "import os\nimport requests\nimport time\nfrom datetime import datetime\n\nCHART_NAME = os.getenv(\"HELM_CHART_NAME\", \"my-fastapi-app\")\nLOKI_BASE_URL = os.getenv(\"LOKI_URL\", \"http://localhost:3100\")\nLOKI_URL = f\"{LOKI_BASE_URL}/loki/api/v1/query_range\"\nQUERY = os.getenv(\"LOKI_QUERY\", '{pod=~\"fastapi.*\"}')\nLOG_FILE = os.getenv(\"LOG_FILE\", \"warning_error_logs.txt\")\n\nseen_logs = set()\n\ndef fetch_latest_logs():\n    params = {\n        \"query\": QUERY,\n        \"limit\": 5,\n        \"direction\": \"backward\"\n    }",
+        "answer": "The `seen_logs` set is used to keep track of log lines that have already been saved to the log file, to prevent duplicate entries."
+    },
+    {
+        "query_id": 35,
+        "repo_name": "fast_api",
+        "file_path": "postgre/log_request.py",
+        "question": "Why is the `response.raise_for_status()` call used in the `fetch_latest_logs()` function?",
+        "context": "import os\nimport requests\nimport time\nfrom datetime import datetime\n\nCHART_NAME = os.getenv(\"HELM_CHART_NAME\", \"my-fastapi-app\")\nLOKI_BASE_URL = os.getenv(\"LOKI_URL\", \"http://localhost:3100\")\nLOKI_URL = f\"{LOKI_BASE_URL}/loki/api/v1/query_range\"\nQUERY = os.getenv(\"LOKI_QUERY\", '{pod=~\"fastapi.*\"}')\nLOG_FILE = os.getenv(\"LOG_FILE\", \"warning_error_logs.txt\")\n\nseen_logs = set()\n\ndef fetch_latest_logs():\n    params = {\n        \"query\": QUERY,\n        \"limit\": 5,\n        \"direction\": \"backward\"\n    }",
+        "answer": "The `response.raise_for_status()` call is used to raise an exception if the HTTP request to the LOKI server returns an unsuccessful status code."
+    },
+    {
+        "query_id": 36,
+        "repo_name": "fast_api",
+        "file_path": "postgre/log_request.py",
+        "question": "What does the `save_if_warning_or_error()` function do with the `latest_logs` retrieved by `fetch_latest_logs()`?",
+        "context": "import os\nimport requests\nimport time\nfrom datetime import datetime\n\nCHART_NAME = os.getenv(\"HELM_CHART_NAME\", \"my-fastapi-app\")\nLOKI_BASE_URL = os.getenv(\"LOKI_URL\", \"http://localhost:3100\")\nLOKI_URL = f\"{LOKI_BASE_URL}/loki/api/v1/query_range\"\nQUERY = os.getenv(\"LOKI_QUERY\", '{pod=~\"fastapi.*\"}')\nLOG_FILE = os.getenv(\"LOG_FILE\", \"warning_error_logs.txt\")\n\nseen_logs = set()\n\ndef fetch_latest_logs():\n    params = {\n        \"query\": QUERY,\n        \"limit\": 5,\n        \"direction\": \"backward\"\n    }",
+        "answer": "The `save_if_warning_or_error()` function saves the latest 5 logs to a file if they contain the words 'warning' or 'error', and prints a message indicating that the log has been saved."
+    },
+    {
+        "query_id": 37,
+        "repo_name": "fast_api",
+        "file_path": "postgre/main.py",
+        "question": "What does the `get_db` function do?",
+        "context": "from fastapi import FastAPI, Depends, HTTPException\nfrom database import Base, SessionLocal, engine\nfrom prometheus_fastapi_instrumentator import Instrumentator\nfrom model import (courses,students,courses_data,students_data,student_data_response,update_student_data,\n)\nfrom sqlalchemy.orm import Session\nimport model\napp = FastAPI()\nInstrumentator().instrument(app).expose(app)\ndef get_db():\n    db = SessionLocal()\n    try:\n        yield db\n    finally:\n        db.close()\n\nmodel.Base.metadata.creat",
+        "answer": "The `get_db` function returns a database session, which is then used to interact with the database. It also ensures that the session is properly closed after use."
+    },
+    {
+        "query_id": 38,
+        "repo_name": "fast_api",
+        "file_path": "postgre/main.py",
+        "question": "Why is the `Instrumentator` from `prometheus_fastapi_instrumentator` used?",
+        "context": "from fastapi import FastAPI, Depends, HTTPException\nfrom database import Base, SessionLocal, engine\nfrom prometheus_fastapi_instrumentator import Instrumentator\nfrom model import (courses,students,courses_data,students_data,student_data_response,update_student_data,\n)\nfrom sqlalchemy.orm import Session\nimport model\napp = FastAPI()\nInstrumentator().instrument(app).expose(app)\ndef get_db():\n    db = SessionLocal()\n    try:\n        yield db\n    finally:\n        db.close()\n\nmodel.Base.metadata.creat",
+        "answer": "The `Instrumentator` is used to instrument the FastAPI application, which means it adds metrics and monitoring capabilities to the application, allowing for performance and usage analysis."
+    },
+    {
+        "query_id": 39,
+        "repo_name": "fast_api",
+        "file_path": "postgre/main.py",
+        "question": "What does the `create_student` function return?",
+        "context": "from fastapi import FastAPI, Depends, HTTPException\nfrom database import Base, SessionLocal, engine\nfrom prometheus_fastapi_instrumentator import Instrumentator\nfrom model import (courses,students,courses_data,students_data,student_data_response,update_student_data,\n)\nfrom sqlalchemy.orm import Session\nimport model\napp = FastAPI()\nInstrumentator().instrument(app).expose(app)\ndef get_db():\n    db = SessionLocal()\n    try:\n        yield db\n    finally:\n        db.close()\n\nmodel.Base.metadata.creat",
+        "answer": "The `create_student` function returns the newly created student object, which contains the student's ID, name, email, and enrolled course."
+    },
+    {
+        "query_id": 40,
+        "repo_name": "fast_api",
+        "file_path": "postgre/model.py",
+        "question": "What does the `courses` class represent in this code?",
+        "context": "from database import Base\nfrom sqlalchemy import Column, Integer, String, Boolean, ForeignKey\nfrom pydantic import BaseModel\n\n\nclass courses(Base):\n    __tablename__ = \"courses_database\"\n    course_code = Column(Integer, primary_key=True, nullable=False, index=True)\n    course_name = Column(String, nullable=False, index=True)\n\n\nclass students(Base):\n    __tablename__ = \"students_database\"\n    student_id = Column(Integer, primary_key=True, nullable=False, index=True)\n    student_name = Column(Str",
+        "answer": "The `courses` class represents a database table named `courses_database` with columns for course code and course name."
+    },
+    {
+        "query_id": 41,
+        "repo_name": "fast_api",
+        "file_path": "postgre/model.py",
+        "question": "Why is the `orm_mode` set to `True` in the `update_student_data` class?",
+        "context": "from database import Base\nfrom sqlalchemy import Column, Integer, String, Boolean, ForeignKey\nfrom pydantic import BaseModel\n\n\nclass courses(Base):\n    __tablename__ = \"courses_database\"\n    course_code = Column(Integer, primary_key=True, nullable=False, index=True)\n    course_name = Column(String, nullable=False, index=True)\n\n\nclass students(Base):\n    __tablename__ = \"students_database\"\n    student_id = Column(Integer, primary_key=True, nullable=False, index=True)\n    student_name = Column(Str",
+        "answer": "The `orm_mode` is set to `True` to allow the `update_student_data` class to be used with an ORM (Object-Relational Mapping) system, such as SQLAlchemy."
+    },
+    {
+        "query_id": 42,
+        "repo_name": "fast_api",
+        "file_path": "postgre/model.py",
+        "question": "What does the `course_enrolled` column in the `students` class represent?",
+        "context": "from database import Base\nfrom sqlalchemy import Column, Integer, String, Boolean, ForeignKey\nfrom pydantic import BaseModel\n\n\nclass courses(Base):\n    __tablename__ = \"courses_database\"\n    course_code = Column(Integer, primary_key=True, nullable=False, index=True)\n    course_name = Column(String, nullable=False, index=True)\n\n\nclass students(Base):\n    __tablename__ = \"students_database\"\n    student_id = Column(Integer, primary_key=True, nullable=False, index=True)\n    student_name = Column(Str",
+        "answer": "The `course_enrolled` column represents the course code of the course that a student is enrolled in."
+    },
+    {
+        "query_id": 43,
+        "repo_name": "fast_api",
+        "file_path": "postgre/requirements.txt",
+        "question": "What is the purpose of the 'prometheus-fastapi-instrumentator' package?",
+        "context": "annotated-doc==0.0.4\nannotated-types==0.7.0\nanyio==4.13.0\nclick==8.4.1\nfastapi==0.136.3\ngreenlet==3.5.1\nh11==0.16.0\nidna==3.17\npydantic==2.13.4\npydantic_core==2.46.4\nSQLAlchemy==2.0.50\nstarlette==1.2.1\ntyping-inspection==0.4.2\ntyping_extensions==4.15.0\nuvicorn==0.48.0\npsycopg2-binary\nprometheus-fastapi-instrumentator",
+        "answer": "It is used to instrument FastAPI applications for Prometheus metrics collection."
+    },
+    {
+        "query_id": 44,
+        "repo_name": "fast_api",
+        "file_path": "postgre/requirements.txt",
+        "question": "Why is 'psycopg2-binary' listed separately from the other packages?",
+        "context": "annotated-doc==0.0.4\nannotated-types==0.7.0\nanyio==4.13.0\nclick==8.4.1\nfastapi==0.136.3\ngreenlet==3.5.1\nh11==0.16.0\nidna==3.17\npydantic==2.13.4\npydantic_core==2.46.4\nSQLAlchemy==2.0.50\nstarlette==1.2.1\ntyping-inspection==0.4.2\ntyping_extensions==4.15.0\nuvicorn==0.48.0\npsycopg2-binary\nprometheus-fastapi-instrumentator",
+        "answer": "It is likely included as a binary package to avoid the need to install PostgreSQL development libraries."
+    },
+    {
+        "query_id": 45,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chat-history.txt",
+        "question": "What does the given snippet represent?",
+        "context": "conversation began; \nend of the conversation",
+        "answer": "The snippet appears to represent the start and end points of a conversation."
+    },
+    {
+        "query_id": 46,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chat-history.txt",
+        "question": "What is the purpose of the 'conversation began' statement?",
+        "context": "conversation began; \nend of the conversation",
+        "answer": "The purpose of the 'conversation began' statement is to mark the start of a conversation."
+    },
+    {
+        "query_id": 47,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chat-history.txt",
+        "question": "How does the snippet indicate the end of a conversation?",
+        "context": "conversation began; \nend of the conversation",
+        "answer": "The snippet indicates the end of a conversation with the statement 'end of the conversation'."
+    },
+    {
+        "query_id": 48,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chatbot1.py",
+        "question": "What is the purpose of loading the environment variables from a .env file?",
+        "context": "from langgraph.graph import StateGraph, END, START\nfrom typing import TypedDict\nfrom langchain_openai import ChatOpenAI\nfrom langchain_core.messages import HumanMessage, AIMessage\nfrom dotenv import load_dotenv\nimport os\n\nload_dotenv(\"/home/rudri/Documents/langgraph/.env\")\nMY_API_KEY = os.getenv(\"OPENAI_API_KEY\")\n\nllm = ChatOpenAI(model=\"gpt-4o\" , api_key=MY_API_KEY)\n\nclass AgentState(TypedDict):\n    messages: list\n\ndef process(state: AgentState) -> AgentState:\n    response = llm.invoke(state[\"m",
+        "answer": "The purpose of loading the environment variables from a .env file is to securely store sensitive information such as the OpenAI API key and load it into the script."
+    },
+    {
+        "query_id": 49,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chatbot1.py",
+        "question": "What does the `process` function return after appending a response from the LLM to the state's messages?",
+        "context": "from langgraph.graph import StateGraph, END, START\nfrom typing import TypedDict\nfrom langchain_openai import ChatOpenAI\nfrom langchain_core.messages import HumanMessage, AIMessage\nfrom dotenv import load_dotenv\nimport os\n\nload_dotenv(\"/home/rudri/Documents/langgraph/.env\")\nMY_API_KEY = os.getenv(\"OPENAI_API_KEY\")\n\nllm = ChatOpenAI(model=\"gpt-4o\" , api_key=MY_API_KEY)\n\nclass AgentState(TypedDict):\n    messages: list\n\ndef process(state: AgentState) -> AgentState:\n    response = llm.invoke(state[\"m",
+        "answer": "The `process` function returns the updated `AgentState` after appending the response from the LLM to the state's messages."
+    },
+    {
+        "query_id": 50,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chatbot1.py",
+        "question": "What type of message is created when the user's input is passed to the chatbot?",
+        "context": "from langgraph.graph import StateGraph, END, START\nfrom typing import TypedDict\nfrom langchain_openai import ChatOpenAI\nfrom langchain_core.messages import HumanMessage, AIMessage\nfrom dotenv import load_dotenv\nimport os\n\nload_dotenv(\"/home/rudri/Documents/langgraph/.env\")\nMY_API_KEY = os.getenv(\"OPENAI_API_KEY\")\n\nllm = ChatOpenAI(model=\"gpt-4o\" , api_key=MY_API_KEY)\n\nclass AgentState(TypedDict):\n    messages: list\n\ndef process(state: AgentState) -> AgentState:\n    response = llm.invoke(state[\"m",
+        "answer": "A `HumanMessage` is created when the user's input is passed to the chatbot."
+    },
+    {
+        "query_id": 51,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chatbot2.py",
+        "question": "What does the `load_dotenv` function do in this code?",
+        "context": "import os\nfrom langgraph.graph import StateGraph\nfrom typing import TypedDict, Union, List\nfrom langgraph.graph import START, END\nfrom dotenv import load_dotenv\nfrom langchain_groq import ChatGroq          \nfrom langchain_core.messages import HumanMessage, AIMessage\n\nload_dotenv(dotenv_path=\"/home/rudri/Documents/langgraph/.env\")\nMY_API_KEY = os.getenv(\"GROQ_API_KEY\")      \nprint(f\"Key loaded: {MY_API_KEY}\")\nllm = ChatGroq(model=\"llama-3.3-70b-versatile\", api_key=MY_API_KEY)  \n\nclass AgentState(",
+        "answer": "The `load_dotenv` function loads environment variables from a .env file located at `/home/rudri/Documents/langgraph/.env`."
+    },
+    {
+        "query_id": 52,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chatbot2.py",
+        "question": "Why is the `MY_API_KEY` variable assigned the value of an environment variable?",
+        "context": "import os\nfrom langgraph.graph import StateGraph\nfrom typing import TypedDict, Union, List\nfrom langgraph.graph import START, END\nfrom dotenv import load_dotenv\nfrom langchain_groq import ChatGroq          \nfrom langchain_core.messages import HumanMessage, AIMessage\n\nload_dotenv(dotenv_path=\"/home/rudri/Documents/langgraph/.env\")\nMY_API_KEY = os.getenv(\"GROQ_API_KEY\")      \nprint(f\"Key loaded: {MY_API_KEY}\")\nllm = ChatGroq(model=\"llama-3.3-70b-versatile\", api_key=MY_API_KEY)  \n\nclass AgentState(",
+        "answer": "The `MY_API_KEY` variable is assigned the value of an environment variable because the API key is stored securely in a .env file and loaded into the environment using `load_dotenv`."
+    },
+    {
+        "query_id": 53,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chatbot2.py",
+        "question": "What does the `process` function return after invoking the LLM?",
+        "context": "import os\nfrom langgraph.graph import StateGraph\nfrom typing import TypedDict, Union, List\nfrom langgraph.graph import START, END\nfrom dotenv import load_dotenv\nfrom langchain_groq import ChatGroq          \nfrom langchain_core.messages import HumanMessage, AIMessage\n\nload_dotenv(dotenv_path=\"/home/rudri/Documents/langgraph/.env\")\nMY_API_KEY = os.getenv(\"GROQ_API_KEY\")      \nprint(f\"Key loaded: {MY_API_KEY}\")\nllm = ChatGroq(model=\"llama-3.3-70b-versatile\", api_key=MY_API_KEY)  \n\nclass AgentState(",
+        "answer": "The `process` function returns the updated `AgentState` object with the appended `AIMessage` containing the LLM's response."
+    },
+    {
+        "query_id": 54,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chatbot3.py",
+        "question": "What does the `load_dotenv()` function do in this code?",
+        "context": "import os\nfrom dotenv import load_dotenv\nfrom langgraph.graph import StateGraph, START, END\nfrom langchain_groq import ChatGroq\nfrom typing import Annotated, Sequence, TypedDict\nfrom langchain_core.messages import BaseMessage, HumanMessage, AIMessage, SystemMessage, ToolMessage\nfrom langchain_core.tools import tool\nfrom langgraph.graph.message import add_messages\nfrom langgraph.prebuilt import ToolNode\n\nload_dotenv()\nGROQ_API = os.getenv(\"GROQ_API_KEY\")\n\nclass AgentState(TypedDict):\n    messages",
+        "answer": "It loads environment variables from a .env file into the current environment."
+    },
+    {
+        "query_id": 55,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chatbot3.py",
+        "question": "Why is the `GROQ_API` variable assigned the value of an environment variable?",
+        "context": "import os\nfrom dotenv import load_dotenv\nfrom langgraph.graph import StateGraph, START, END\nfrom langchain_groq import ChatGroq\nfrom typing import Annotated, Sequence, TypedDict\nfrom langchain_core.messages import BaseMessage, HumanMessage, AIMessage, SystemMessage, ToolMessage\nfrom langchain_core.tools import tool\nfrom langgraph.graph.message import add_messages\nfrom langgraph.prebuilt import ToolNode\n\nload_dotenv()\nGROQ_API = os.getenv(\"GROQ_API_KEY\")\n\nclass AgentState(TypedDict):\n    messages",
+        "answer": "It's likely because the GROQ API key is stored as an environment variable, and this line retrieves its value."
+    },
+    {
+        "query_id": 56,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chatbot3.py",
+        "question": "What does the `response_generator` function return?",
+        "context": "import os\nfrom dotenv import load_dotenv\nfrom langgraph.graph import StateGraph, START, END\nfrom langchain_groq import ChatGroq\nfrom typing import Annotated, Sequence, TypedDict\nfrom langchain_core.messages import BaseMessage, HumanMessage, AIMessage, SystemMessage, ToolMessage\nfrom langchain_core.tools import tool\nfrom langgraph.graph.message import add_messages\nfrom langgraph.prebuilt import ToolNode\n\nload_dotenv()\nGROQ_API = os.getenv(\"GROQ_API_KEY\")\n\nclass AgentState(TypedDict):\n    messages",
+        "answer": "It returns a new `AgentState` object with a single message that is the response from the LLM model."
+    },
+    {
+        "query_id": 57,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chatbot3.py",
+        "question": "What is the purpose of the `graph.add_conditional_edges` method?",
+        "context": "tool_node = ToolNode(tools=tool_list)\n\ngraph.add_node(\"all_tools\", tool_node)\n\ngraph.add_edge(START, \"communicator\")\ngraph.add_conditional_edges(\n    \"communicator\",\n    decider,\n    {\n     \n        \"continue\": \"all_tools\",\n        \"end\": END\n    }\n)\n\ngraph.add_edge(\"all_tools\", \"communicator\")\n\nmy_first_ReACT_chatbot = graph.compile()\n\n#using chat history we can now store all the chats \n\nchat_history=[]\nuser_input = input(\"Enter: \")\nwhile user_input != \"exit\":\n    chat_history.append(HumanMessa",
+        "answer": "The `graph.add_conditional_edges` method is used to add conditional edges to the graph based on the output of the `decider` function."
+    },
+    {
+        "query_id": 58,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chatbot3.py",
+        "question": "What does the `my_first_ReACT_chatbot.invoke` method return?",
+        "context": "tool_node = ToolNode(tools=tool_list)\n\ngraph.add_node(\"all_tools\", tool_node)\n\ngraph.add_edge(START, \"communicator\")\ngraph.add_conditional_edges(\n    \"communicator\",\n    decider,\n    {\n     \n        \"continue\": \"all_tools\",\n        \"end\": END\n    }\n)\n\ngraph.add_edge(\"all_tools\", \"communicator\")\n\nmy_first_ReACT_chatbot = graph.compile()\n\n#using chat history we can now store all the chats \n\nchat_history=[]\nuser_input = input(\"Enter: \")\nwhile user_input != \"exit\":\n    chat_history.append(HumanMessa",
+        "answer": "The `my_first_ReACT_chatbot.invoke` method returns the result of the chatbot's conversation, which includes the updated `chat_history`."
+    },
+    {
+        "query_id": 59,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chatbot3.py",
+        "question": "Why is the `chat_history` list being written to a file?",
+        "context": "tool_node = ToolNode(tools=tool_list)\n\ngraph.add_node(\"all_tools\", tool_node)\n\ngraph.add_edge(START, \"communicator\")\ngraph.add_conditional_edges(\n    \"communicator\",\n    decider,\n    {\n     \n        \"continue\": \"all_tools\",\n        \"end\": END\n    }\n)\n\ngraph.add_edge(\"all_tools\", \"communicator\")\n\nmy_first_ReACT_chatbot = graph.compile()\n\n#using chat history we can now store all the chats \n\nchat_history=[]\nuser_input = input(\"Enter: \")\nwhile user_input != \"exit\":\n    chat_history.append(HumanMessa",
+        "answer": "The `chat_history` list is being written to a file to store the conversation history of the chatbot."
+    },
+    {
+        "query_id": 60,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chatbot3.txt",
+        "question": "What does the AI respond with when it doesn't have enough information to solve a math problem?",
+        "context": "conversation start :\nYou:hello\nAI:I'm happy to chat with you, but I don't see a specific math problem to solve. If you have a question or problem, feel free to ask and I'll do my best to assist you using the available functions.\nYou:whats 3*4\nAI:\nAI:12\nAI:The result of 3*4 is 12.\nYou:whats is today's date\nAI:I'm not able to provide real-time information or current dates. I'm a large language model, my knowledge was last updated in 2023, and I don't have have access to current events or dates. If",
+        "answer": "The AI responds with a message stating it doesn't see a specific math problem to solve and asks the user to ask a question or problem."
+    },
+    {
+        "query_id": 61,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chatbot3.txt",
+        "question": "Why does the AI not provide the current date?",
+        "context": "conversation start :\nYou:hello\nAI:I'm happy to chat with you, but I don't see a specific math problem to solve. If you have a question or problem, feel free to ask and I'll do my best to assist you using the available functions.\nYou:whats 3*4\nAI:\nAI:12\nAI:The result of 3*4 is 12.\nYou:whats is today's date\nAI:I'm not able to provide real-time information or current dates. I'm a large language model, my knowledge was last updated in 2023, and I don't have have access to current events or dates. If",
+        "answer": "The AI does not provide the current date because it's a large language model with knowledge last updated in 2023 and lacks access to real-time information or current events."
+    },
+    {
+        "query_id": 62,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chatbot3.txt",
+        "question": "What does the AI return as the result of the '3*4' calculation?",
+        "context": "conversation start :\nYou:hello\nAI:I'm happy to chat with you, but I don't see a specific math problem to solve. If you have a question or problem, feel free to ask and I'll do my best to assist you using the available functions.\nYou:whats 3*4\nAI:\nAI:12\nAI:The result of 3*4 is 12.\nYou:whats is today's date\nAI:I'm not able to provide real-time information or current dates. I'm a large language model, my knowledge was last updated in 2023, and I don't have have access to current events or dates. If",
+        "answer": "The AI returns the result '12' as the result of the '3*4' calculation."
+    },
+    {
+        "query_id": 63,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chatbot4_drafter.py",
+        "question": "What is the purpose of loading the .env file in this code?",
+        "context": "import os\nfrom dotenv import load_dotenv\nfrom langgraph.graph import StateGraph, START, END\nfrom typing import Annotated, TypedDict, Sequence\nfrom langchain_core.messages import ToolMessage, AIMessage, HumanMessage, SystemMessage, BaseMessage\nfrom langgraph.graph.message import add_messages\nfrom langchain_core.tools import tool\nfrom langchain_groq import ChatGroq\nfrom langgraph.prebuilt import ToolNode\n\nload_dotenv()\n\nGROQ_API = os.getenv(\"GROQ_API_KEY\")\nllm_model = ChatGroq(model=\"llama-3.3-70b",
+        "answer": "The purpose of loading the .env file is to load environment variables, specifically the GROQ_API_KEY, which is used to authenticate with the GROQ API."
+    },
+    {
+        "query_id": 64,
+        "repo_name": "traffic_bot",
+        "file_path": "Documents/langgraph/chatbot4_drafter.py",
+        "question": "What does the `document_editor` function return after editing the document?",
+        "context": "import os\nfrom dotenv import load_dotenv\nfrom langgraph.graph import StateGraph, START, END\nfrom typing import Annotated, TypedDict, Sequence\nfrom langchain_core.messages import ToolMessage, AIMessage, HumanMessage, SystemMessage, BaseMessage\nfrom langgraph.graph.message import add_messages\nfrom langchain_core.tools import tool\nfrom langchain_groq import ChatGroq\nfrom langgraph.prebuilt import ToolNode\n\nload_dotenv()\n\nGROQ_API = os.getenv(\"GROQ_API_KEY\")\nllm_model = ChatGroq(model=\"llama-3.3-70b",
+        "answer": "The `document_editor` function returns a string indicating that the document has been edited and the current document content."
+    },
+    {
+        "query_id": 65,
+        "repo_name": "ICS-Project",
+        "file_path": "README.md",
+        "question": "What programming language is used to implement the ICS-Project?",
+        "context": "# ICS-Project\n\n## Introduction\nThe project consists of a fantasy genre RPG (Role-Playing Game) inspired by DnD, played entirely within a terminal emulator.\n\n## Gallery\n\n<img width=\"1600\" height=\"698\" alt=\"demo_story\" src=\"https://github.com/user-attachments/assets/dc74f29a-7286-49df-a9c4-20795194efdb\" />\n<img width=\"1857\" height=\"700\" alt=\"demo_combat\" src=\"https://github.com/user-attachments/assets/54274ba6-a190-40e2-893e-8fca88780d2e\" />\n\nhttps://github.com/user-attachments/assets/e07fe2e2-f9e",
+        "answer": "The project is implemented entirely in C."
+    },
+    {
+        "query_id": 66,
+        "repo_name": "ICS-Project",
+        "file_path": "README.md",
+        "question": "What library is used to make the Text User Interface (TUI) for the project?",
+        "context": "# ICS-Project\n\n## Introduction\nThe project consists of a fantasy genre RPG (Role-Playing Game) inspired by DnD, played entirely within a terminal emulator.\n\n## Gallery\n\n<img width=\"1600\" height=\"698\" alt=\"demo_story\" src=\"https://github.com/user-attachments/assets/dc74f29a-7286-49df-a9c4-20795194efdb\" />\n<img width=\"1857\" height=\"700\" alt=\"demo_combat\" src=\"https://github.com/user-attachments/assets/54274ba6-a190-40e2-893e-8fca88780d2e\" />\n\nhttps://github.com/user-attachments/assets/e07fe2e2-f9e",
+        "answer": "The de facto standard library used for making TUIs is <ncurses.h>."
+    },
+    {
+        "query_id": 67,
+        "repo_name": "ICS-Project",
+        "file_path": "README.md",
+        "question": "How are the animations implemented in the project?",
+        "context": "# ICS-Project\n\n## Introduction\nThe project consists of a fantasy genre RPG (Role-Playing Game) inspired by DnD, played entirely within a terminal emulator.\n\n## Gallery\n\n<img width=\"1600\" height=\"698\" alt=\"demo_story\" src=\"https://github.com/user-attachments/assets/dc74f29a-7286-49df-a9c4-20795194efdb\" />\n<img width=\"1857\" height=\"700\" alt=\"demo_combat\" src=\"https://github.com/user-attachments/assets/54274ba6-a190-40e2-893e-8fca88780d2e\" />\n\nhttps://github.com/user-attachments/assets/e07fe2e2-f9e",
+        "answer": "The animations were implemented by doing changes delayed by a few milliseconds to give the impression of movement."
+    },
+    {
+        "query_id": 68,
+        "repo_name": "ICS-Project",
+        "file_path": "ascii_art/README.md",
+        "question": "What is the purpose of the ASCII Art Generator program?",
+        "context": "# ASCII Art Generator\n\n![Game Logo](logo.png)\n\nA simple C program that dynamically generates procedural ASCII art for a text-based adventure game. \n\n## Included Designs\n\n- **STORM GRYPHON**\n- **GRANITE NAGA**\n- **IRON GOBLIN**\n- **COMBAT ENCOUNTER**\n\n## Gallery\n\n```text\nSTORM GRYPHON\n\n      /v\\\n   |\\0_0//|\n    \\_^_//\n     / | \\\n    /_ | _\\\n```\n\n```text\nGRANITE NAGA\n\n    _ 0_0\n   /_|---'\n   [__]\n  /_/\n  [__]\n  \\__\\\n   [__]\n```\n\n## How to Build & Run\n\n```bash\ngcc generator.c -o generator\n./generat",
+        "answer": "The program dynamically generates procedural ASCII art for a text-based adventure game."
+    },
+    {
+        "query_id": 69,
+        "repo_name": "ICS-Project",
+        "file_path": "ascii_art/README.md",
+        "question": "Why is the program written in C?",
+        "context": "# ASCII Art Generator\n\n![Game Logo](logo.png)\n\nA simple C program that dynamically generates procedural ASCII art for a text-based adventure game. \n\n## Included Designs\n\n- **STORM GRYPHON**\n- **GRANITE NAGA**\n- **IRON GOBLIN**\n- **COMBAT ENCOUNTER**\n\n## Gallery\n\n```text\nSTORM GRYPHON\n\n      /v\\\n   |\\0_0//|\n    \\_^_//\n     / | \\\n    /_ | _\\\n```\n\n```text\nGRANITE NAGA\n\n    _ 0_0\n   /_|---'\n   [__]\n  /_/\n  [__]\n  \\__\\\n   [__]\n```\n\n## How to Build & Run\n\n```bash\ngcc generator.c -o generator\n./generat",
+        "answer": "There is no explicit reason given in the snippet, but it may be due to the simplicity and efficiency required for the task."
+    },
+    {
+        "query_id": 70,
+        "repo_name": "ICS-Project",
+        "file_path": "ascii_art/README.md",
+        "question": "What does the command `gcc generator.c -o generator` do?",
+        "context": "# ASCII Art Generator\n\n![Game Logo](logo.png)\n\nA simple C program that dynamically generates procedural ASCII art for a text-based adventure game. \n\n## Included Designs\n\n- **STORM GRYPHON**\n- **GRANITE NAGA**\n- **IRON GOBLIN**\n- **COMBAT ENCOUNTER**\n\n## Gallery\n\n```text\nSTORM GRYPHON\n\n      /v\\\n   |\\0_0//|\n    \\_^_//\n     / | \\\n    /_ | _\\\n```\n\n```text\nGRANITE NAGA\n\n    _ 0_0\n   /_|---'\n   [__]\n  /_/\n  [__]\n  \\__\\\n   [__]\n```\n\n## How to Build & Run\n\n```bash\ngcc generator.c -o generator\n./generat",
+        "answer": "It compiles the `generator.c` file into an executable named `generator` using the GNU C Compiler."
+    },
+    {
+        "query_id": 71,
+        "repo_name": "ICS-Project",
+        "file_path": "ascii_art/combat_goblin.txt",
+        "question": "What is the purpose of the combat scenario layout?",
+        "context": "=======================================================\n                  COMBAT ENGAGED\n=======================================================\n\nKNIGHT                   IRON GOBLIN\n\n  ---                       .-\"-.\n /   \\                     | o_o |\n|  0  |                   /[#####]\\\n \\V|V/                    | [###] |\n  / \\                      \\_/^\\_/\n\n[===] SWORD              [##] WARHAMMER\n\nHP: 75/75                HP: 40/40\n\n-------------------------------------------------------\nAction",
+        "answer": "The purpose of the combat scenario layout is to visually represent the two combatants, their health points, and their available actions."
+    },
+    {
+        "query_id": 72,
+        "repo_name": "ICS-Project",
+        "file_path": "ascii_art/combat_goblin.txt",
+        "question": "Why are the health points of the KNIGHT and IRON GOBLIN displayed as HP: 75/75 and HP: 40/40 respectively?",
+        "context": "=======================================================\n                  COMBAT ENGAGED\n=======================================================\n\nKNIGHT                   IRON GOBLIN\n\n  ---                       .-\"-.\n /   \\                     | o_o |\n|  0  |                   /[#####]\\\n \\V|V/                    | [###] |\n  / \\                      \\_/^\\_/\n\n[===] SWORD              [##] WARHAMMER\n\nHP: 75/75                HP: 40/40\n\n-------------------------------------------------------\nAction",
+        "answer": "The health points are displayed as HP: 75/75 and HP: 40/40 to show the current health points (75 and 40) out of their maximum health points (75 and 40) for the KNIGHT and IRON GOBLIN respectively."
+    },
+    {
+        "query_id": 73,
+        "repo_name": "ICS-Project",
+        "file_path": "ascii_art/combat_goblin.txt",
+        "question": "What does the [===] SWORD and [##] WARHAMMER represent?",
+        "context": "=======================================================\n                  COMBAT ENGAGED\n=======================================================\n\nKNIGHT                   IRON GOBLIN\n\n  ---                       .-\"-.\n /   \\                     | o_o |\n|  0  |                   /[#####]\\\n \\V|V/                    | [###] |\n  / \\                      \\_/^\\_/\n\n[===] SWORD              [##] WARHAMMER\n\nHP: 75/75                HP: 40/40\n\n-------------------------------------------------------\nAction",
+        "answer": "The [===] SWORD and [##] WARHAMMER represent the KNIGHT's and IRON GOBLIN's respective weapons."
+    },
+    {
+        "query_id": 74,
+        "repo_name": "ICS-Project",
+        "file_path": "ascii_art/combat_gryphon.txt",
+        "question": "What is the purpose of the graphical representation of the KNIGHT and STORM-WINGED GRYPHON?",
+        "context": "=======================================================\n                  COMBAT ENGAGED\n=======================================================\n\nKNIGHT                   STORM-WINGED GRYPHON\n\n                                      ___\n  ---                                (o_o)\n /   \\                              (  V  )\n|  0  |                     /------. \\   / .------\\\n \\V|V/                     / |      \\ \\ / /      | \\\n  / \\                     /  |       \\ | /       |  \\\n                   ",
+        "answer": "The graphical representation appears to be a simple ASCII art illustration of the two combatants, providing a visual representation of their characters."
+    },
+    {
+        "query_id": 75,
+        "repo_name": "ICS-Project",
+        "file_path": "ascii_art/combat_gryphon.txt",
+        "question": "What does the HP: 75/75 and HP: 300/300 indicate?",
+        "context": "=======================================================\n                  COMBAT ENGAGED\n=======================================================\n\nKNIGHT                   STORM-WINGED GRYPHON\n\n                                      ___\n  ---                                (o_o)\n /   \\                              (  V  )\n|  0  |                     /------. \\   / .------\\\n \\V|V/                     / |      \\ \\ / /      | \\\n  / \\                     /  |       \\ | /       |  \\\n                   ",
+        "answer": "The HP values represent the current health points of the KNIGHT and STORM-WINGED GRYPHON, with the first number being the current HP and the second number being the maximum HP."
+    },
+    {
+        "query_id": 76,
+        "repo_name": "ICS-Project",
+        "file_path": "ascii_art/combat_gryphon.txt",
+        "question": "What is the function of the Action menu?",
+        "context": "=======================================================\n                  COMBAT ENGAGED\n=======================================================\n\nKNIGHT                   STORM-WINGED GRYPHON\n\n                                      ___\n  ---                                (o_o)\n /   \\                              (  V  )\n|  0  |                     /------. \\   / .------\\\n \\V|V/                     / |      \\ \\ / /      | \\\n  / \\                     /  |       \\ | /       |  \\\n                   ",
+        "answer": "The Action menu allows the user to choose from four options: [A]ttack, [D]efend, [I]tem, and [R]un, which likely correspond to different actions that can be taken in the combat scenario."
+    },
+    {
+        "query_id": 77,
+        "repo_name": "ICS-Project",
+        "file_path": "ascii_art/combat_naga.txt",
+        "question": "What is the purpose of the HP values displayed on the screen?",
+        "context": "=======================================================\n                  COMBAT ENGAGED\n=======================================================\n\nKNIGHT                   GRANITE NAGA\n\n  ---                       _ 0_0\n /   \\                     /_|---'\n|  0  |                    [__]\n \\V|V/                    /_/\n  / \\                     [__]\n                          \\__\\\n                           [__]\n\n[===] SWORD              [##] TAIL SLAM\n\nHP: 75/75                HP: 120/120\n\n----------",
+        "answer": "The HP values display the current health points of the two combatants, Knight and Granite Naga."
+    },
+    {
+        "query_id": 78,
+        "repo_name": "ICS-Project",
+        "file_path": "ascii_art/combat_naga.txt",
+        "question": "Why is the combatant's HP displayed as '75/75' rather than just '75'?",
+        "context": "=======================================================\n                  COMBAT ENGAGED\n=======================================================\n\nKNIGHT                   GRANITE NAGA\n\n  ---                       _ 0_0\n /   \\                     /_|---'\n|  0  |                    [__]\n \\V|V/                    /_/\n  / \\                     [__]\n                          \\__\\\n                           [__]\n\n[===] SWORD              [##] TAIL SLAM\n\nHP: 75/75                HP: 120/120\n\n----------",
+        "answer": "The '75/75' display indicates the maximum health points of the combatant, showing that the current HP is at maximum capacity."
+    },
+    {
+        "query_id": 79,
+        "repo_name": "ICS-Project",
+        "file_path": "ascii_art/combat_naga.txt",
+        "question": "What does the '[A]ttack' option allow the player to do?",
+        "context": "=======================================================\n                  COMBAT ENGAGED\n=======================================================\n\nKNIGHT                   GRANITE NAGA\n\n  ---                       _ 0_0\n /   \\                     /_|---'\n|  0  |                    [__]\n \\V|V/                    /_/\n  / \\                     [__]\n                          \\__\\\n                           [__]\n\n[===] SWORD              [##] TAIL SLAM\n\nHP: 75/75                HP: 120/120\n\n----------",
+        "answer": "The '[A]ttack' option allows the player to initiate an attack on the opponent."
+    },
+    {
+        "query_id": 80,
+        "repo_name": "ICS-Project",
+        "file_path": "ascii_art/combat_wisp.txt",
+        "question": "What is the purpose of the HP: 75/75 and HP: 20/20 lines?",
+        "context": "=======================================================\n                  COMBAT ENGAGED\n=======================================================\n\nKNIGHT                   NEON WILLOW-WISP\n\n                             *  .  *\n  ---                     *  \\ | / *\n /   \\                  .   - -(O)- -   .\n|  0  |                   *  / | \\ *\n \\V|V/                       *  .  *\n  / \\\n\n[===] SWORD              [##] MEMORY DRAIN\n\nHP: 75/75                HP: 20/20\n\n----------------------------------",
+        "answer": "These lines display the current health points of the KNIGHT and NEON WILLOW-WISP, indicating their current status in the combat."
+    },
+    {
+        "query_id": 81,
+        "repo_name": "ICS-Project",
+        "file_path": "ascii_art/combat_wisp.txt",
+        "question": "Why is the [===] SWORD and [##] MEMORY DRAIN displayed?",
+        "context": "=======================================================\n                  COMBAT ENGAGED\n=======================================================\n\nKNIGHT                   NEON WILLOW-WISP\n\n                             *  .  *\n  ---                     *  \\ | / *\n /   \\                  .   - -(O)- -   .\n|  0  |                   *  / | \\ *\n \\V|V/                       *  .  *\n  / \\\n\n[===] SWORD              [##] MEMORY DRAIN\n\nHP: 75/75                HP: 20/20\n\n----------------------------------",
+        "answer": "The [===] SWORD and [##] MEMORY DRAIN appear to be the KNIGHT's and NEON WILLOW-WISP's respective attack and defense mechanisms, or abilities."
+    },
+    {
+        "query_id": 82,
+        "repo_name": "ICS-Project",
+        "file_path": "ascii_art/combat_wisp.txt",
+        "question": "What does the '> ' prompt do?",
+        "context": "=======================================================\n                  COMBAT ENGAGED\n=======================================================\n\nKNIGHT                   NEON WILLOW-WISP\n\n                             *  .  *\n  ---                     *  \\ | / *\n /   \\                  .   - -(O)- -   .\n|  0  |                   *  / | \\ *\n \\V|V/                       *  .  *\n  / \\\n\n[===] SWORD              [##] MEMORY DRAIN\n\nHP: 75/75                HP: 20/20\n\n----------------------------------",
+        "answer": "The '> ' prompt is a command line where the user can input actions, such as [A]ttack, [D]efend, [I]tem, or [R]un."
+    },
+    {
+        "query_id": 83,
+        "repo_name": "ICS-Project",
+        "file_path": "ascii_art/goblin.txt",
+        "question": "What is the purpose of the ASCII art in this snippet?",
+        "context": ".-\"-.\n   | o_o |\n  /[#####]\\\n  | [###] |\n   \\_/^\\_/",
+        "answer": "This snippet appears to be a simple ASCII art representation of a cat's face."
+    },
+    {
+        "query_id": 84,
+        "repo_name": "ICS-Project",
+        "file_path": "ascii_art/goblin.txt",
+        "question": "Why are there multiple lines in the ASCII art?",
+        "context": ".-\"-.\n   | o_o |\n  /[#####]\\\n  | [###] |\n   \\_/^\\_/",
+        "answer": "The ASCII art is composed of multiple lines to create a 3D-like representation of the cat's face."
+    },
+    {
+        "query_id": 85,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "App.js",
+        "question": "What does the 'loading' state variable represent in this code?",
+        "context": "import React, { useEffect, useState } from \"react\";\nimport { NavigationContainer } from \"@react-navigation/native\";\nimport StackNavigator from \"./src/navigation/StackNavigator\";\nimport { auth } from \"./src/services/firebaseConfig\";\nimport { onAuthStateChanged } from \"firebase/auth\";\n\nexport default function App() {\n  const [loading, setLoading] = useState(true);\n\n  useEffect(() => {\n    const unsubscribe = onAuthStateChanged(auth, () => {\n      setLoading(false);\n    });\n\n    return unsubscribe;",
+        "answer": "The 'loading' state variable represents whether the application is currently loading its authentication state."
+    },
+    {
+        "query_id": 86,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "App.js",
+        "question": "Why is the 'onAuthStateChanged' callback passed a function that sets 'loading' to false?",
+        "context": "import React, { useEffect, useState } from \"react\";\nimport { NavigationContainer } from \"@react-navigation/native\";\nimport StackNavigator from \"./src/navigation/StackNavigator\";\nimport { auth } from \"./src/services/firebaseConfig\";\nimport { onAuthStateChanged } from \"firebase/auth\";\n\nexport default function App() {\n  const [loading, setLoading] = useState(true);\n\n  useEffect(() => {\n    const unsubscribe = onAuthStateChanged(auth, () => {\n      setLoading(false);\n    });\n\n    return unsubscribe;",
+        "answer": "The callback is passed a function that sets 'loading' to false when the authentication state has been successfully loaded."
+    },
+    {
+        "query_id": 87,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "App.js",
+        "question": "What does the 'unsubscribe' function returned by 'useEffect' do?",
+        "context": "import React, { useEffect, useState } from \"react\";\nimport { NavigationContainer } from \"@react-navigation/native\";\nimport StackNavigator from \"./src/navigation/StackNavigator\";\nimport { auth } from \"./src/services/firebaseConfig\";\nimport { onAuthStateChanged } from \"firebase/auth\";\n\nexport default function App() {\n  const [loading, setLoading] = useState(true);\n\n  useEffect(() => {\n    const unsubscribe = onAuthStateChanged(auth, () => {\n      setLoading(false);\n    });\n\n    return unsubscribe;",
+        "answer": "The 'unsubscribe' function returned by 'useEffect' is used to remove the event listener for the 'onAuthStateChanged' callback when the component is unmounted."
+    },
+    {
+        "query_id": 88,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "SUBMISSIONS.md",
+        "question": "What is the purpose of the links provided in this snippet?",
+        "context": "- [G Drive Link](https://drive.google.com/drive/folders/1jDe9x6DOHhIg6qvdwl0UcYD_Dclsr4Yq?usp=sharing)\n- [Demo Video Link](https://drive.google.com/file/d/13IZEHs4p2LtFkYw3xmmkx7EM5vAbEksq/view?usp=drive_link)\n- [Presentation](https://docs.google.com/presentation/d/1WYpzqqMEt1YwGDWW4TTIEV2IefRTFxmB/edit?usp=drive_link&ouid=113543811759511499260&rtpof=true&sd=true)",
+        "answer": "The links are likely for supporting materials, such as a Google Drive folder, a demo video, and a presentation, related to a project or tutorial."
+    },
+    {
+        "query_id": 89,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "SUBMISSIONS.md",
+        "question": "Why is the Google Drive link formatted as a folder link rather than a file link?",
+        "context": "- [G Drive Link](https://drive.google.com/drive/folders/1jDe9x6DOHhIg6qvdwl0UcYD_Dclsr4Yq?usp=sharing)\n- [Demo Video Link](https://drive.google.com/file/d/13IZEHs4p2LtFkYw3xmmkx7EM5vAbEksq/view?usp=drive_link)\n- [Presentation](https://docs.google.com/presentation/d/1WYpzqqMEt1YwGDWW4TTIEV2IefRTFxmB/edit?usp=drive_link&ouid=113543811759511499260&rtpof=true&sd=true)",
+        "answer": "The Google Drive link is formatted as a folder link because it contains multiple files or subfolders, rather than a single file."
+    },
+    {
+        "query_id": 90,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "SUBMISSIONS.md",
+        "question": "What type of content is likely to be found in the presentation linked here?",
+        "context": "- [G Drive Link](https://drive.google.com/drive/folders/1jDe9x6DOHhIg6qvdwl0UcYD_Dclsr4Yq?usp=sharing)\n- [Demo Video Link](https://drive.google.com/file/d/13IZEHs4p2LtFkYw3xmmkx7EM5vAbEksq/view?usp=drive_link)\n- [Presentation](https://docs.google.com/presentation/d/1WYpzqqMEt1YwGDWW4TTIEV2IefRTFxmB/edit?usp=drive_link&ouid=113543811759511499260&rtpof=true&sd=true)",
+        "answer": "The presentation likely contains an overview or summary of the project or tutorial, including key points, screenshots, or diagrams."
+    },
+    {
+        "query_id": 91,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "index.js",
+        "question": "What does the `registerRootComponent` function from Expo do?",
+        "context": "import { registerRootComponent } from 'expo';\n\nimport App from './App';\n\n// registerRootComponent calls AppRegistry.registerComponent('main', () => App);\n// It also ensures that whether you load the app in Expo Go or in a native build,\n// the environment is set up appropriately\nregisterRootComponent(App);",
+        "answer": "The `registerRootComponent` function from Expo registers the root component of the app and sets up the environment for both Expo Go and native builds."
+    },
+    {
+        "query_id": 92,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "index.js",
+        "question": "Why is the `App` component passed directly to `registerRootComponent`?",
+        "context": "import { registerRootComponent } from 'expo';\n\nimport App from './App';\n\n// registerRootComponent calls AppRegistry.registerComponent('main', () => App);\n// It also ensures that whether you load the app in Expo Go or in a native build,\n// the environment is set up appropriately\nregisterRootComponent(App);",
+        "answer": "The `App` component is passed directly to `registerRootComponent` because it is the root component of the app, which is being registered with the app registry."
+    },
+    {
+        "query_id": 93,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "index.js",
+        "question": "What is the purpose of the comment explaining how `registerRootComponent` works?",
+        "context": "import { registerRootComponent } from 'expo';\n\nimport App from './App';\n\n// registerRootComponent calls AppRegistry.registerComponent('main', () => App);\n// It also ensures that whether you load the app in Expo Go or in a native build,\n// the environment is set up appropriately\nregisterRootComponent(App);",
+        "answer": "The comment explains the implementation details of `registerRootComponent` and how it interacts with the `AppRegistry.registerComponent` method to set up the app environment."
+    },
+    {
+        "query_id": 94,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "mymarks.js",
+        "question": "What is the purpose of the `translateX` Animated Value in this code?",
+        "context": "import React, { useRef, useState } from \"react\";\nimport {\n  StyleSheet,\n  Text,\n  View,\n  Image,\n  TouchableOpacity,\n  Animated,\n  PanResponder,\n  ScrollView,\n  Modal,\n  TextInput\n} from \"react-native\";\n\nexport default function SecondPage() {\n\n  /* ---------------- Sidebar Animation (UNCHANGED) ---------------- */\n\n  const sidebarWidth = 150;\n  const translateX = useRef(new Animated.Value(0)).current;\n  const isOpen = useRef(true);\n\n  const panResponder = useRef(\n    PanResponder.create({\n      ",
+        "answer": "The `translateX` Animated Value is used to animate the position of the sidebar on the screen."
+    },
+    {
+        "query_id": 95,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "mymarks.js",
+        "question": "Why is the `useNativeDriver` option set to `true` when animating the `translateX` value?",
+        "context": "import React, { useRef, useState } from \"react\";\nimport {\n  StyleSheet,\n  Text,\n  View,\n  Image,\n  TouchableOpacity,\n  Animated,\n  PanResponder,\n  ScrollView,\n  Modal,\n  TextInput\n} from \"react-native\";\n\nexport default function SecondPage() {\n\n  /* ---------------- Sidebar Animation (UNCHANGED) ---------------- */\n\n  const sidebarWidth = 150;\n  const translateX = useRef(new Animated.Value(0)).current;\n  const isOpen = useRef(true);\n\n  const panResponder = useRef(\n    PanResponder.create({\n      ",
+        "answer": "The `useNativeDriver` option is set to `true` to utilize the native animation driver, which can improve performance in React Native applications."
+    },
+    {
+        "query_id": 96,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "mymarks.js",
+        "question": "What happens when the user releases the pan gesture and the `dx` value is less than -50?",
+        "context": "import React, { useRef, useState } from \"react\";\nimport {\n  StyleSheet,\n  Text,\n  View,\n  Image,\n  TouchableOpacity,\n  Animated,\n  PanResponder,\n  ScrollView,\n  Modal,\n  TextInput\n} from \"react-native\";\n\nexport default function SecondPage() {\n\n  /* ---------------- Sidebar Animation (UNCHANGED) ---------------- */\n\n  const sidebarWidth = 150;\n  const translateX = useRef(new Animated.Value(0)).current;\n  const isOpen = useRef(true);\n\n  const panResponder = useRef(\n    PanResponder.create({\n      ",
+        "answer": "When the user releases the pan gesture and the `dx` value is less than -50, the sidebar is closed by animating the `translateX` value to `-sidebarWidth`."
+    },
+    {
+        "query_id": 97,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "mymarks.js",
+        "question": "What does the 'subjects' object represent in this code?",
+        "context": "/* ---------------- Subjects Data (Increased) ---------------- */\n\n  const subjects = {\n    Mathematics: { Quiz1: 18, Quiz2: 17, Minor1: 38, Minor2: 40, Major: 82 },\n    \"Computer Science\": { Quiz1: 15, Quiz2: 16, Minor1: 34, Minor2: 36, Major: 78 },\n    Physics: { Quiz1: 19, Quiz2: 18, Minor1: 37, Minor2: 35, Major: 80 },\n    Chemistry: { Quiz1: 16, Quiz2: 15, Minor1: 32, Minor2: 34, Major: 76 },\n    Electronics: { Quiz1: 17, Quiz2: 18, Minor1: 36, Minor2: 39, Major: 81 },\n    Mechanics: { Quiz",
+        "answer": "The 'subjects' object represents a collection of subjects with their respective scores."
+    },
+    {
+        "query_id": 98,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "mymarks.js",
+        "question": "Why is the 'id' property in the 'newDispute' object set to 'Date.now()'?",
+        "context": "/* ---------------- Subjects Data (Increased) ---------------- */\n\n  const subjects = {\n    Mathematics: { Quiz1: 18, Quiz2: 17, Minor1: 38, Minor2: 40, Major: 82 },\n    \"Computer Science\": { Quiz1: 15, Quiz2: 16, Minor1: 34, Minor2: 36, Major: 78 },\n    Physics: { Quiz1: 19, Quiz2: 18, Minor1: 37, Minor2: 35, Major: 80 },\n    Chemistry: { Quiz1: 16, Quiz2: 15, Minor1: 32, Minor2: 34, Major: 76 },\n    Electronics: { Quiz1: 17, Quiz2: 18, Minor1: 36, Minor2: 39, Major: 81 },\n    Mechanics: { Quiz",
+        "answer": "The 'id' property is set to 'Date.now()' to generate a unique identifier for each new dispute."
+    },
+    {
+        "query_id": 99,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "mymarks.js",
+        "question": "What does the 'setDisputes' function do when called with a new dispute?",
+        "context": "/* ---------------- Subjects Data (Increased) ---------------- */\n\n  const subjects = {\n    Mathematics: { Quiz1: 18, Quiz2: 17, Minor1: 38, Minor2: 40, Major: 82 },\n    \"Computer Science\": { Quiz1: 15, Quiz2: 16, Minor1: 34, Minor2: 36, Major: 78 },\n    Physics: { Quiz1: 19, Quiz2: 18, Minor1: 37, Minor2: 35, Major: 80 },\n    Chemistry: { Quiz1: 16, Quiz2: 15, Minor1: 32, Minor2: 34, Major: 76 },\n    Electronics: { Quiz1: 17, Quiz2: 18, Minor1: 36, Minor2: 39, Major: 81 },\n    Mechanics: { Quiz",
+        "answer": "The 'setDisputes' function updates the list of disputes by adding the new dispute to the beginning of the list."
+    },
+    {
+        "query_id": 100,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "mymarks.js",
+        "question": "What does the `map` method do in the first code block?",
+        "context": "{[\"Dashboard\", \"My Marks\",\"Bus Tracker\", \"Grievances\"]\n          .map(item => (\n            <TouchableOpacity key={item} style={styles.menuBtn}>\n              <Text style={styles.menuText}>{item}</Text>\n            </TouchableOpacity>\n          ))}\n      </Animated.View>\n\n      {/* Main Content */}\n      <ScrollView style={styles.main} contentContainerStyle={{ paddingBottom: 40 }}>\n\n        <Text style={styles.heading}>Academic Dashboard</Text>\n\n        {/* Subject Selector */}\n        <ScrollVi",
+        "answer": "It creates an array of JSX elements from the given array of strings, which are then rendered as a list of touchable buttons."
+    },
+    {
+        "query_id": 101,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "mymarks.js",
+        "question": "Why is the `selectedSubject` variable used to conditionally apply styles to the subject buttons?",
+        "context": "{[\"Dashboard\", \"My Marks\",\"Bus Tracker\", \"Grievances\"]\n          .map(item => (\n            <TouchableOpacity key={item} style={styles.menuBtn}>\n              <Text style={styles.menuText}>{item}</Text>\n            </TouchableOpacity>\n          ))}\n      </Animated.View>\n\n      {/* Main Content */}\n      <ScrollView style={styles.main} contentContainerStyle={{ paddingBottom: 40 }}>\n\n        <Text style={styles.heading}>Academic Dashboard</Text>\n\n        {/* Subject Selector */}\n        <ScrollVi",
+        "answer": "It is used to highlight the currently selected subject, indicating which subject's data is being displayed in the marks section."
+    },
+    {
+        "query_id": 102,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "mymarks.js",
+        "question": "What does the `Object.entries` method do in the marks section?",
+        "context": "{[\"Dashboard\", \"My Marks\",\"Bus Tracker\", \"Grievances\"]\n          .map(item => (\n            <TouchableOpacity key={item} style={styles.menuBtn}>\n              <Text style={styles.menuText}>{item}</Text>\n            </TouchableOpacity>\n          ))}\n      </Animated.View>\n\n      {/* Main Content */}\n      <ScrollView style={styles.main} contentContainerStyle={{ paddingBottom: 40 }}>\n\n        <Text style={styles.heading}>Academic Dashboard</Text>\n\n        {/* Subject Selector */}\n        <ScrollVi",
+        "answer": "It returns an array of key-value pairs from the `subjects` object, where the key is the exam name and the value is the corresponding score, allowing them to be iterated and rendered as a list of marks."
+    },
+    {
+        "query_id": 103,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "mymarks.js",
+        "question": "What does the `filterStatus` variable control?",
+        "context": "{/* Dispute History */}\n        <View style={{ flexDirection: \"row\", marginTop: 30 }}>\n  {[\"All\", \"Pending\", \"Resolved\"].map(status => (\n    <TouchableOpacity\n      key={status}\n      style={[\n        styles.subjectButton,\n        filterStatus === status && styles.activeSubject\n      ]}\n      onPress={() => setFilterStatus(status)}\n    >\n      <Text style={styles.subjectText}>{status}</Text>\n    </TouchableOpacity>\n  ))}\n</View>\n        {disputes.length > 0 && (\n          <>\n            <Text st",
+        "answer": "The `filterStatus` variable controls the status of disputes displayed on the screen, allowing the user to filter by 'All', 'Pending', or 'Resolved'."
+    },
+    {
+        "query_id": 104,
+        "repo_name": "Insomniac-Hackathon",
+        "file_path": "mymarks.js",
+        "question": "Why is the `key` prop used in the `TouchableOpacity` and `View` components?",
+        "context": "{/* Dispute History */}\n        <View style={{ flexDirection: \"row\", marginTop: 30 }}>\n  {[\"All\", \"Pending\", \"Resolved\"].map(status => (\n    <TouchableOpacity\n      key={status}\n      style={[\n        styles.subjectButton,\n        filterStatus === status && styles.activeSubject\n      ]}\n      onPress={() => setFilterStatus(status)}\n    >\n      <Text style={styles.subjectText}>{status}</Text>\n    </TouchableOpacity>\n  ))}\n</View>\n        {disputes.length > 0 && (\n          <>\n            <Text st",
+        "answer": "The `key` prop is used to uniquely identify each component, which is necessary for React to efficiently update the virtual DOM."
+    },
+    {
+        "query_id": 105,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chat-history.txt",
+        "question": "What does the given snippet represent?",
+        "context": "conversation began; \nend of the conversation",
+        "answer": "The given snippet appears to represent the start and end of a conversation."
+    },
+    {
+        "query_id": 106,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chat-history.txt",
+        "question": "What is the purpose of the 'conversation began' line?",
+        "context": "conversation began; \nend of the conversation",
+        "answer": "The purpose of the 'conversation began' line is to mark the start of a conversation."
+    },
+    {
+        "query_id": 107,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chat-history.txt",
+        "question": "What does the 'end of the conversation' line signify?",
+        "context": "conversation began; \nend of the conversation",
+        "answer": "The 'end of the conversation' line signifies the termination of a conversation."
+    },
+    {
+        "query_id": 108,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chatbot1.py",
+        "question": "What is the purpose of loading the .env file and retrieving the OPENAI_API_KEY?",
+        "context": "from langgraph.graph import StateGraph, END, START\nfrom typing import TypedDict\nfrom langchain_openai import ChatOpenAI\nfrom langchain_core.messages import HumanMessage, AIMessage\nfrom dotenv import load_dotenv\nimport os\n\nload_dotenv(\"/home/rudri/Documents/langgraph/.env\")\nMY_API_KEY = os.getenv(\"OPENAI_API_KEY\")\n\nllm = ChatOpenAI(model=\"gpt-4o\" , api_key=MY_API_KEY)\n\nclass AgentState(TypedDict):\n    messages: list\n\ndef process(state: AgentState) -> AgentState:\n    response = llm.invoke(state[\"m",
+        "answer": "The purpose is to securely store and retrieve the OpenAI API key, which is used to authenticate and authorize API requests to the OpenAI model."
+    },
+    {
+        "query_id": 109,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chatbot1.py",
+        "question": "How does the process function modify the AgentState?",
+        "context": "from langgraph.graph import StateGraph, END, START\nfrom typing import TypedDict\nfrom langchain_openai import ChatOpenAI\nfrom langchain_core.messages import HumanMessage, AIMessage\nfrom dotenv import load_dotenv\nimport os\n\nload_dotenv(\"/home/rudri/Documents/langgraph/.env\")\nMY_API_KEY = os.getenv(\"OPENAI_API_KEY\")\n\nllm = ChatOpenAI(model=\"gpt-4o\" , api_key=MY_API_KEY)\n\nclass AgentState(TypedDict):\n    messages: list\n\ndef process(state: AgentState) -> AgentState:\n    response = llm.invoke(state[\"m",
+        "answer": "The process function appends the response from the LLM to the 'messages' list in the AgentState."
+    },
+    {
+        "query_id": 110,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chatbot1.py",
+        "question": "What does the chatbot.invoke method return?",
+        "context": "from langgraph.graph import StateGraph, END, START\nfrom typing import TypedDict\nfrom langchain_openai import ChatOpenAI\nfrom langchain_core.messages import HumanMessage, AIMessage\nfrom dotenv import load_dotenv\nimport os\n\nload_dotenv(\"/home/rudri/Documents/langgraph/.env\")\nMY_API_KEY = os.getenv(\"OPENAI_API_KEY\")\n\nllm = ChatOpenAI(model=\"gpt-4o\" , api_key=MY_API_KEY)\n\nclass AgentState(TypedDict):\n    messages: list\n\ndef process(state: AgentState) -> AgentState:\n    response = llm.invoke(state[\"m",
+        "answer": "The chatbot.invoke method returns the result of the conversation, which includes the final message in the conversation."
+    },
+    {
+        "query_id": 111,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chatbot3.py",
+        "question": "What is the purpose of the `load_dotenv()` function in this code?",
+        "context": "import os\nfrom dotenv import load_dotenv\nfrom langgraph.graph import StateGraph, START, END\nfrom langchain_groq import ChatGroq\nfrom typing import Annotated, Sequence, TypedDict\nfrom langchain_core.messages import BaseMessage, HumanMessage, AIMessage, SystemMessage, ToolMessage\nfrom langchain_core.tools import tool\nfrom langgraph.graph.message import add_messages\nfrom langgraph.prebuilt import ToolNode\n\nload_dotenv()\nGROQ_API = os.getenv(\"GROQ_API_KEY\")\n\nclass AgentState(TypedDict):\n    messages",
+        "answer": "The `load_dotenv()` function is used to load environment variables from a `.env` file."
+    },
+    {
+        "query_id": 112,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chatbot3.py",
+        "question": "What does the `tool` decorator do in this code?",
+        "context": "import os\nfrom dotenv import load_dotenv\nfrom langgraph.graph import StateGraph, START, END\nfrom langchain_groq import ChatGroq\nfrom typing import Annotated, Sequence, TypedDict\nfrom langchain_core.messages import BaseMessage, HumanMessage, AIMessage, SystemMessage, ToolMessage\nfrom langchain_core.tools import tool\nfrom langgraph.graph.message import add_messages\nfrom langgraph.prebuilt import ToolNode\n\nload_dotenv()\nGROQ_API = os.getenv(\"GROQ_API_KEY\")\n\nclass AgentState(TypedDict):\n    messages",
+        "answer": "The `tool` decorator is used to register a function as a tool that can be used by the LLM model."
+    },
+    {
+        "query_id": 113,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chatbot3.py",
+        "question": "What is the purpose of the `decider` function in this code?",
+        "context": "import os\nfrom dotenv import load_dotenv\nfrom langgraph.graph import StateGraph, START, END\nfrom langchain_groq import ChatGroq\nfrom typing import Annotated, Sequence, TypedDict\nfrom langchain_core.messages import BaseMessage, HumanMessage, AIMessage, SystemMessage, ToolMessage\nfrom langchain_core.tools import tool\nfrom langgraph.graph.message import add_messages\nfrom langgraph.prebuilt import ToolNode\n\nload_dotenv()\nGROQ_API = os.getenv(\"GROQ_API_KEY\")\n\nclass AgentState(TypedDict):\n    messages",
+        "answer": "The `decider` function determines whether the conversation should continue or end based on whether the last message contained any tool calls."
+    },
+    {
+        "query_id": 114,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chatbot3.txt",
+        "question": "What is the purpose of the 'I'm happy to chat with you' message?",
+        "context": "conversation start :\nYou:hello\nAI:I'm happy to chat with you, but I don't see a specific math problem to solve. If you have a question or problem, feel free to ask and I'll do my best to assist you using the available functions.\nYou:whats 3*4\nAI:\nAI:12\nAI:The result of 3*4 is 12.\nYou:whats is today's date\nAI:I'm not able to provide real-time information or current dates. I'm a large language model, my knowledge was last updated in 2023, and I don't have have access to current events or dates. If",
+        "answer": "This message is a greeting from the AI, welcoming the user to the conversation."
+    },
+    {
+        "query_id": 115,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chatbot3.txt",
+        "question": "Why does the AI say it doesn't have access to real-time information or current dates?",
+        "context": "conversation start :\nYou:hello\nAI:I'm happy to chat with you, but I don't see a specific math problem to solve. If you have a question or problem, feel free to ask and I'll do my best to assist you using the available functions.\nYou:whats 3*4\nAI:\nAI:12\nAI:The result of 3*4 is 12.\nYou:whats is today's date\nAI:I'm not able to provide real-time information or current dates. I'm a large language model, my knowledge was last updated in 2023, and I don't have have access to current events or dates. If",
+        "answer": "The AI's knowledge was last updated in 2023, and it does not have the ability to access current events or dates."
+    },
+    {
+        "query_id": 116,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chatbot3.txt",
+        "question": "What does the AI return when the user asks for the result of 3*4?",
+        "context": "conversation start :\nYou:hello\nAI:I'm happy to chat with you, but I don't see a specific math problem to solve. If you have a question or problem, feel free to ask and I'll do my best to assist you using the available functions.\nYou:whats 3*4\nAI:\nAI:12\nAI:The result of 3*4 is 12.\nYou:whats is today's date\nAI:I'm not able to provide real-time information or current dates. I'm a large language model, my knowledge was last updated in 2023, and I don't have have access to current events or dates. If",
+        "answer": "The AI returns the result '12' and also provides a detailed explanation of the calculation."
+    },
+    {
+        "query_id": 117,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chatbot4_drafter.py",
+        "question": "What does the `load_dotenv()` function do?",
+        "context": "import os\nfrom dotenv import load_dotenv\nfrom langgraph.graph import StateGraph, START, END\nfrom typing import Annotated, TypedDict, Sequence\nfrom langchain_core.messages import ToolMessage, AIMessage, HumanMessage, SystemMessage, BaseMessage\nfrom langgraph.graph.message import add_messages\nfrom langchain_core.tools import tool\nfrom langchain_groq import ChatGroq\nfrom langgraph.prebuilt import ToolNode\n\nload_dotenv()\n\nGROQ_API = os.getenv(\"GROQ_API_KEY\")\nllm_model = ChatGroq(model=\"llama-3.3-70b",
+        "answer": "The `load_dotenv()` function loads environment variables from a .env file."
+    },
+    {
+        "query_id": 118,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chatbot4_drafter.py",
+        "question": "Why is the `ChatGroq` model bound to the `tool_list`?",
+        "context": "import os\nfrom dotenv import load_dotenv\nfrom langgraph.graph import StateGraph, START, END\nfrom typing import Annotated, TypedDict, Sequence\nfrom langchain_core.messages import ToolMessage, AIMessage, HumanMessage, SystemMessage, BaseMessage\nfrom langgraph.graph.message import add_messages\nfrom langchain_core.tools import tool\nfrom langchain_groq import ChatGroq\nfrom langgraph.prebuilt import ToolNode\n\nload_dotenv()\n\nGROQ_API = os.getenv(\"GROQ_API_KEY\")\nllm_model = ChatGroq(model=\"llama-3.3-70b",
+        "answer": "The `ChatGroq` model is bound to the `tool_list` to integrate it with the tools defined in the list, enabling the chatbot to use the tools for document editing and saving."
+    },
+    {
+        "query_id": 119,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chatbot4_drafter.py",
+        "question": "What does the `document_saver` function return after saving the document?",
+        "context": "import os\nfrom dotenv import load_dotenv\nfrom langgraph.graph import StateGraph, START, END\nfrom typing import Annotated, TypedDict, Sequence\nfrom langchain_core.messages import ToolMessage, AIMessage, HumanMessage, SystemMessage, BaseMessage\nfrom langgraph.graph.message import add_messages\nfrom langchain_core.tools import tool\nfrom langchain_groq import ChatGroq\nfrom langgraph.prebuilt import ToolNode\n\nload_dotenv()\n\nGROQ_API = os.getenv(\"GROQ_API_KEY\")\nllm_model = ChatGroq(model=\"llama-3.3-70b",
+        "answer": "The `document_saver` function returns a message indicating that the document has been saved, along with the current content of the document."
+    },
+    {
+        "query_id": 120,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chatbot4_drafter.py",
+        "question": "What does the `communicator` function return?",
+        "context": "tool_list = [document_editor, document_saver]\nllm_model = llm_model.bind_tools(tool_list)\n\ndef communicator(state: AgentState) -> AgentState:\n    global document_content\n    system_prompt = SystemMessage(content=f\"\"\"\n       You are an AI drafting agent. Edit the document content based on user instructions.\n       - Use document_editor tool to make changes to the document\n       - Use document_saver tool after editing to save the file\n       Current document: {document_content}\"\"\")\n\n    if not st",
+        "answer": "The `communicator` function returns an `AgentState` object with a list of messages, including the result of invoking the LLM model."
+    },
+    {
+        "query_id": 121,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chatbot4_drafter.py",
+        "question": "Why is the `system_prompt` variable used in the `communicator` function?",
+        "context": "tool_list = [document_editor, document_saver]\nllm_model = llm_model.bind_tools(tool_list)\n\ndef communicator(state: AgentState) -> AgentState:\n    global document_content\n    system_prompt = SystemMessage(content=f\"\"\"\n       You are an AI drafting agent. Edit the document content based on user instructions.\n       - Use document_editor tool to make changes to the document\n       - Use document_saver tool after editing to save the file\n       Current document: {document_content}\"\"\")\n\n    if not st",
+        "answer": "The `system_prompt` variable is used to provide a system message to the user, explaining the available tools and current document content."
+    },
+    {
+        "query_id": 122,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chatbot4_drafter.py",
+        "question": "What condition in the `shall_continue` function causes it to return 'end'?",
+        "context": "tool_list = [document_editor, document_saver]\nllm_model = llm_model.bind_tools(tool_list)\n\ndef communicator(state: AgentState) -> AgentState:\n    global document_content\n    system_prompt = SystemMessage(content=f\"\"\"\n       You are an AI drafting agent. Edit the document content based on user instructions.\n       - Use document_editor tool to make changes to the document\n       - Use document_saver tool after editing to save the file\n       Current document: {document_content}\"\"\")\n\n    if not st",
+        "answer": "The `shall_continue` function returns 'end' if a `ToolMessage` is found in the reversed list of messages, and it contains the words 'saved' and 'document' (case-insensitive)."
+    },
+    {
+        "query_id": 123,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chatbot4_drafter.py",
+        "question": "What is the purpose of the StateGraph in this code?",
+        "context": "graph = StateGraph(AgentState)\ngraph.add_node(\"communicator\", communicator)\nall_tools = ToolNode(tools=tool_list)\ngraph.add_node(\"tools\", all_tools)\ngraph.add_edge(START, \"communicator\")\ngraph.add_edge(\"communicator\" , \"tools\")\ngraph.add_conditional_edges(\n    \"tools\",\n    shall_continue,\n    {\n        \"continue\" : \"communicator\" ,\n        \"end\" :END\n    }\n)\n\nmy_drafter_ai = graph.compile()\n\nchat_history = []\nuser_input = input(\"Enter: \")\n\nwhile user_input != \"exit\":\n    chat_history.append(Huma",
+        "answer": "The StateGraph is used to model the conversation flow between the user and the AI, allowing the AI to make decisions based on the user's input."
+    },
+    {
+        "query_id": 124,
+        "repo_name": "langgraph",
+        "file_path": "Documents/langgraph/chatbot4_drafter.py",
+        "question": "Why is the graph.add_conditional_edges method used with the 'tools' node?",
+        "context": "graph = StateGraph(AgentState)\ngraph.add_node(\"communicator\", communicator)\nall_tools = ToolNode(tools=tool_list)\ngraph.add_node(\"tools\", all_tools)\ngraph.add_edge(START, \"communicator\")\ngraph.add_edge(\"communicator\" , \"tools\")\ngraph.add_conditional_edges(\n    \"tools\",\n    shall_continue,\n    {\n        \"continue\" : \"communicator\" ,\n        \"end\" :END\n    }\n)\n\nmy_drafter_ai = graph.compile()\n\nchat_history = []\nuser_input = input(\"Enter: \")\n\nwhile user_input != \"exit\":\n    chat_history.append(Huma",
+        "answer": "The graph.add_conditional_edges method is used to define the conditional edges that will be followed when the AI reaches the 'tools' node, based on the shall_continue function."
+    }
+]

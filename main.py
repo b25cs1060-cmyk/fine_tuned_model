@@ -3,7 +3,6 @@ from datasets import load_dataset
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from peft import LoraConfig, TaskType, get_peft_model, prepare_model_for_kbit_training
 from trl import SFTTrainer, SFTConfig
-import json
 
 MODEL_NAME = "Qwen/Qwen2.5-Coder-7B-Instruct"
 
@@ -19,10 +18,13 @@ model = AutoModelForCausalLM.from_pretrained(
     torch_dtype="auto",
     device_map="auto",
     quantization_config=bnb_config,
+    low_cpu_mem_usage=True
 )
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-
 model = prepare_model_for_kbit_training(model)
+
+
+model.gradient_checkpointing_enable()
 
 lora_config = LoraConfig(
     task_type=TaskType.CAUSAL_LM,
@@ -36,34 +38,33 @@ lora_config = LoraConfig(
 )
 model = get_peft_model(model, lora_config)
 
-dataset = load_dataset("json", data_files="/home/rudri/Documents/fine_tuning_llms/model/dataset.json")
+dataset = load_dataset("json", data_files="/content/dataset.json")
 dataset = dataset["train"].train_test_split(test_size=0.2, shuffle=True)
 
-def formatting_prompts_func(batch):
-    output_texts = []
-    for i in range(len(batch["question"])):
-        text = f"""<|im_start|>system
+def formatting_prompts_func(example):
+    text = f"""<|im_start|>system
 You are Qwen, created by Alibaba Cloud. You are a helpful assistant responsible for answering questions about GitHub repositories.<|im_end|>
 <|im_start|>user
-{batch['question'][i]}<|im_end|>
+{example['question']}<|im_end|>
 <|im_start|>assistant
-{batch['answer'][i]}<|im_end|>"""
-        output_texts.append(text)
-    return output_texts
+{example['answer']}<|im_end|>"""
+    return text
 
 training_args = SFTConfig(
     output_dir="./trained_data",
-    per_device_train_batch_size=8,
-    per_device_eval_batch_size=8,
+    per_device_train_batch_size=1,
+    per_device_eval_batch_size=1,
+    gradient_accumulation_steps=8,
     num_train_epochs=3,
     learning_rate=5e-5,
     lr_scheduler_type="cosine",
-    max_seq_length=512,     
-    packing=True,
-    packing_strategy="bfd_split",
+    max_length=512,
+    packing=False,
     eval_strategy="epoch",
     save_strategy="epoch",
     logging_steps=1,
+    gradient_checkpointing=True,
+    gradient_checkpointing_kwargs={'use_reentrant': False}
 )
 
 trainer = SFTTrainer(
