@@ -1,0 +1,186 @@
+ [
+   
+    {   "query_id" : 1 ,
+        "repo_name": "traffic_bot",
+        "file_path": "main.py",
+        "question": "What is the main purpose of the traffic_bot repository?",
+        "context": "The repo is a Python-based traffic assistant project using agents for weather, traffic, and events.",
+        "answer": "The traffic_bot repository is meant to answer traffic-related questions by combining traffic, weather, and event information."
+    },
+    {   "query_id" : 2 ,
+        "repo_name": "traffic_bot",
+        "file_path": "main.py",
+        "question": "Why does the traffic bot need a geocoding API?",
+        "context": "The bot uses city names but APIs like weather and traffic often require latitude and longitude.",
+        "answer": "The geocoding API converts a city name into latitude and longitude so that the weather and traffic APIs can use those coordinates."
+    },
+    {   "query_id" : 3 ,
+        "repo_name": "traffic_bot",
+        "file_path": "main.py",
+        "question": "What does the weather agent do?",
+        "context": "The weather agent uses OpenWeather data after converting the city into coordinates.",
+        "answer": "The weather agent fetches weather information such as rain, humidity, temperature, or precipitation for a given city."
+    },
+    {   "query_id" : 4 ,
+        "repo_name": "traffic_bot",
+        "file_path": "main.py",
+        "question": "What does the traffic agent do?",
+        "context": "The traffic agent uses TomTom traffic APIs with coordinates.",
+        "answer": "The traffic agent fetches traffic flow or traffic incident information for a city using TomTom APIs."
+    },
+    {   "query_id" : 5 ,
+        "repo_name": "traffic_bot",
+        "file_path": "main.py",
+        "question": "What does the event agent contribute to the traffic bot?",
+        "context": "The event agent uses Ticketmaster event data for a city.",
+        "answer": "The event agent finds events in a city that may affect traffic conditions."
+    },
+
+  
+    {   "query_id" : 6 ,
+        "repo_name": "fastAPI-app",
+        "file_path": "main2.py",
+        "question": "What is the purpose of the Items model?",
+        "context": "class Items(BaseModel):\n    item_id: int\n    item_name: str\n    item_price: int",
+        "answer": "The Items model defines the structure of item data. It requires an item ID, item name, and item price."
+    },
+    {   "query_id" : 7 ,
+        "repo_name": "fastAPI-app",
+        "file_path": "main2.py",
+        "question": "What does the /items endpoint do?",
+        "context": "@my_app2.post('/items')\ndef insert_item_info(item: Items):\n    print(item)\n    return item",
+        "answer": "The /items endpoint accepts item data, validates it using the Items model, prints it, and returns the same data."
+    },
+    {   "query_id" : 8 ,
+        "repo_name": "fastAPI-app",
+        "file_path": "main2.py",
+        "question": "Why is BaseModel used in this FastAPI app?",
+        "context": "from pydantic import BaseModel\n\nclass Items(BaseModel):",
+        "answer": "BaseModel is used to define and validate the request body structure."
+    },
+    {   "query_id" : 9 ,
+        "repo_name": "fastAPI-app",
+        "file_path": "main2.py",
+        "question": "What kind of request does /items accept?",
+        "context": "@my_app2.post('/items')",
+        "answer": "The /items endpoint accepts a POST request."
+    },
+    {   "query_id" : 10 ,
+        "repo_name": "fastAPI-app",
+        "file_path": "main2.py",
+        "question": "What is returned after inserting an item?",
+        "context": "return item",
+        "answer": "The API returns the same item object that was sent in the request body."
+    },
+
+  
+    {   "query_id" : 11 ,
+        "repo_name": "langgraph",
+        "file_path": "main.py",
+        "question": "What is the purpose of the langgraph repository?",
+        "context": "The repo contains Python experiments related to LangGraph workflows.",
+        "answer": "The langgraph repository is used for learning and experimenting with LangGraph state graphs and agent workflows."
+    },
+    {   "query_id" : 12 ,
+        "repo_name": "langgraph",
+        "file_path": "main.py",
+        "question": "What is StateGraph used for?",
+        "context": "from langgraph.graph import StateGraph, START, END",
+        "answer": "StateGraph is used to define a graph-based workflow where each node performs a step and edges decide the flow."
+    },
+    {   "query_id" : 13,
+        "repo_name": "langgraph",
+        "file_path": "main.py",
+        "question": "What do START and END represent in LangGraph?",
+        "context": "from langgraph.graph import StateGraph, START, END",
+        "answer": "START represents the beginning of the graph execution, and END represents the stopping point."
+    },
+    {   "query_id" : 14 ,
+        "repo_name": "langgraph",
+        "file_path": "main.py",
+        "question": "Why is TypedDict useful in a LangGraph state?",
+        "context": "from typing import TypedDict",
+        "answer": "TypedDict helps define the expected structure of the state passed between graph nodes."
+    },
+    {   "query_id" : 15,
+        "repo_name": "langgraph",
+        "file_path": "main.py",
+        "question": "What is a node in LangGraph?",
+        "context": "graph.add_node(...)",
+        "answer": "A node is a function or processing step inside the graph."
+    },
+
+   
+    {   "query_id" : 16,
+        "repo_name": "FastAPI-forked",
+        "file_path": "main.py",
+        "question": "What is the purpose of this FastAPI project?",
+        "context": "return {'messgae':'Patient management system API'}",
+        "answer": "This project is a patient management system API built with FastAPI."
+    },
+    {
+        "repo_name": "FastAPI-forked",
+        "file_path": "main.py",
+        "question": "What does load_data do?",
+        "context": "def load_data():\n    with open('patients.json', 'r') as f:\n        data = json.load(f)\n    return data",
+        "answer": "load_data reads patient data from patients.json and returns it as Python data."
+    },
+    {   "query_id" : 17 ,
+        "repo_name": "FastAPI-forked",
+        "file_path": "main.py",
+        "question": "What does save_data do?",
+        "context": "def save_data(data):\n    with open('patients.json','w') as f:\n        json.dump(data,f)",
+        "answer": "save_data writes the updated patient data back into patients.json."
+    },
+    {   "query_id" : 18,
+        "repo_name": "FastAPI-forked",
+        "file_path": "main.py",
+        "question": "What does the /view endpoint return?",
+        "context": "for patient in data.values():\n    if patient.get('is_active', True):\n        active_patients.append(patient)\nreturn active_patients",
+        "answer": "The /view endpoint returns only active patients from the patient database."
+    },
+    {   "query_id" : 19,
+        "repo_name": "FastAPI-forked",
+        "file_path": "main.py",
+        "question": "Why is is_active used instead of deleting patient data permanently?",
+        "context": "data[patient_id]['is_active'] = False",
+        "answer": "is_active allows soft deletion. The patient is hidden from active results without permanently removing the record."
+    },
+
+  
+    {   "query_id" : 20 ,
+        "repo_name": "personal_use",
+        "file_path": "mcp_server.py",
+        "question": "What is the purpose of mcp_server.py?",
+        "context": "from mcp.server.fastmcp import FastMCP\nmcp = FastMCP('CounselAI')",
+        "answer": "mcp_server.py creates an MCP server named CounselAI."
+    },
+    {   "query_id" : 21 ,
+        "repo_name": "personal_use",
+        "file_path": "mcp_server.py",
+        "question": "Why are tool modules imported in the MCP server?",
+        "context": "import tools_postgreSQL.get_colleges\nimport tools_pinecone.find_similar_college",
+        "answer": "The tool modules are imported so their tools get registered with the MCP server."
+    },
+    {   "query_id" : 22 ,
+        "repo_name": "personal_use",
+        "file_path": "tools.py",
+        "question": "What does get_colleges do?",
+        "context": "def get_colleges(rank:int, gender:str, year:int, round_number:int, category_name:str):",
+        "answer": "get_colleges searches for colleges based on rank, gender, year, round number, and category."
+    },
+    {   "query_id" : 23 ,
+        "repo_name": "personal_use",
+        "file_path": "tools.py",
+        "question": "What does branch_change_info do?",
+        "context": "def branch_change_info(college_name: str, target_branch_name: str):",
+        "answer": "branch_change_info checks branch change information for a given college and target branch."
+    },
+    {   "query_id" : 24 ,
+        "repo_name": "personal_use",
+        "file_path": "tools.py",
+        "question": "What does get_admission_chances estimate?",
+        "context": "diff_pct = ((target.closing_rank - rank) / target.closing_rank) * 100",
+        "answer": "get_admission_chances estimates whether a college branch is Safety, Match, Dream, or Unlikely based on rank and closing rank."
+    }
+]
